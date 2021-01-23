@@ -1,0 +1,23 @@
+version: "3"
+
+# docker-compose run --rm dbclient
+# docker-compose stop
+# docker-compose rm -f
+
+services: 
+  db:
+    image: mysql:latest
+    restart: always
+    container_name: my-db-server
+    environment: 
+      MYSQL_ROOT_PASSWORD: somepass
+      MYSQL_DATABASE: somedatabase
+    volumes: 
+      - ./data:/var/lib/mysql # Persistency
+    
+  dbclient:
+    image: mysql:latest
+    depends_on: 
+      - db # The DB service takes some seconds to load and serve
+    command: mysql -uroot -psomepass -hdb # It will run and exit
+  

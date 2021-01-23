@@ -1,0 +1,26 @@
+version: "3"
+
+# docker-compose up -.build -d
+# docker-compose logs phpapp
+# docker-compose logs db
+# docker-compose ps
+# docker-compose down
+
+services: 
+  phpapp:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: phpapp:mysqli
+    ports: 
+      - "8080:80"
+    volumes: 
+      - "./:/var/www/html"
+    container_name: myphpapp-web
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: "my!!root!!pw"
+    container_name: myphpapp-db

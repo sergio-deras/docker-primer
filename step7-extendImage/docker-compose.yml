@@ -1,0 +1,19 @@
+version: "3"
+
+services: 
+  phpapp:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    image: phpapp:extended
+    ports: 
+      - "8080:80"
+    volumes: 
+      - "./:/var/www/html"
+    container_name: my-php-app
+
+# Rebuild the image
+# docker-compose up --build  
+
+# CONTAINER ID        IMAGE               NAMES
+# c578e25d3339        phpapp:extended     my-php-app

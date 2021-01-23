@@ -1,0 +1,12 @@
+version: "3"
+
+services: 
+  phpapp:
+    ports: 
+      - "8080:80"
+    image: php:7.2-apache
+    volumes: 
+      - "./:/var/www/html"
+
+# docker-compose up
+# docker-compose rm
