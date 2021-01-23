@@ -1,0 +1,21 @@
+version: "3"
+
+# docker volume ls
+# docker volume rm step10-volumes_my-vol-ref
+# docker volume create --name my-vol-ref
+# docker run -v my-vol-ref:./mydata --rm -it ubuntu /bin/bash
+services: 
+  db:
+    image: mysql:latest
+    restart: always
+    container_name: my-db-server
+    environment: 
+      MYSQL_ROOT_PASSWORD: somepass
+      MYSQL_DATABASE: somedatabase
+    volumes: 
+      - my-vol-ref:/var/lib/mysql # Persistency
+  
+volumes: 
+  my-vol-ref:
+    external: true # Use this to reference an existing volume 
+    # or a new one "(dir)_(volref)" will created by docker-composer
